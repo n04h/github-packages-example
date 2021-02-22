@@ -1,5 +1,5 @@
 {
-  "name": "github-packages-example",
+  "name": "@n04h/github-packages-example",
   "version": "1.0.0",
   "description": "GitHub Packafesをつかったパッケージ配布方法確認用",
   "main": "index.js",
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/n04h/github-packages-example.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/n04h"
   },
   "author": "N04h",
   "license": "ISC",
