@@ -1,0 +1,31 @@
+on:
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == true
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    - name: setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+        registry-url: 'https://npm.pkg.github.com'
+    - name: publish package
+      run: |
+        npm run build
+        npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: add tag
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        TAG: ${{github.head_ref}}
+        REPO: ${{github.repository}}
+        COMMIT: ${{github.sha}}
+      run: ./.github/scripts/add-tag.sh
