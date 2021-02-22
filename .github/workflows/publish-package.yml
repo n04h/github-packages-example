@@ -17,9 +17,7 @@ jobs:
         node-version: '12.x'
         registry-url: 'https://npm.pkg.github.com'
     - name: publish package
-      run: |
-        npm run build
-        npm publish
+      run: npm publish
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: add tag
